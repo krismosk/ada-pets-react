@@ -49,6 +49,9 @@ class NewPetForm extends Component {
         location: '',
       });
     }
+    else {
+      console.log('Cannot Submit');
+    }
   }
 
   render () {
@@ -73,6 +76,7 @@ class NewPetForm extends Component {
             onChange={this.onInputChange}
             value={this.state.species}
           >
+            <option value=""></option>
             <option value="dog">Dog</option>
             <option value="cat">Cat</option>
           </select>
