@@ -48,7 +48,7 @@ class App extends Component {
   deletePet = (petId) => {
     axios.delete(`http://localhost:2999/pets/${ petId }`)
       .then((response) => {
-        const petList = this.state.petList.filter((pet) => {
+        const petList = this.state.originalPets.filter((pet) => {
           return pet.id !== petId;
         });
 
