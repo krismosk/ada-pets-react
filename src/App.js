@@ -9,16 +9,14 @@ import NewPetForm from './components/NewPetForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import { pets } from './data/pets.json';
-
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      petList: pets,
+      petList: [],
       currentPet: undefined,
-      originalPets: pets,
+      originalPets: [],
     };
   }
 
