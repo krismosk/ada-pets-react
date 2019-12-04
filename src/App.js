@@ -21,7 +21,7 @@ class App extends Component {
   }
 
   componentDidMount () {
-    axios.get('http://localhost:2999/pets')
+    axios.get('http://localhost:3000/pets')
       .then((response) => {
         this.setState({
           petList: response.data,
@@ -46,7 +46,7 @@ class App extends Component {
   }
 
   deletePet = (petId) => {
-    axios.delete(`http://localhost:2999/pets/${ petId }`)
+    axios.delete(`http://localhost:3000/pets/${ petId }`)
       .then((response) => {
         const petList = this.state.fullList.filter((pet) => {
           return pet.id !== petId;
@@ -63,7 +63,7 @@ class App extends Component {
   }
 
   addPet = (pet) => {
-    axios.post('http://localhost:2999/pets', pet)
+    axios.post('http://localhost:3000/pets', pet)
       .then((response) => {
         // We can update the state so we don't need to make another GET request
         let updatedData = this.state.fullList;
