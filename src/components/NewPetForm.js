@@ -49,7 +49,7 @@ class NewPetForm extends Component {
         location: '',
       });
     } else {
-      console.log('Cannot Submit');
+      console.error('Cannot Submit');
     }
   }
 
