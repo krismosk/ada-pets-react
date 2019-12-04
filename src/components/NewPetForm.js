@@ -48,8 +48,7 @@ class NewPetForm extends Component {
         image: '',
         location: '',
       });
-    }
-    else {
+    } else {
       console.log('Cannot Submit');
     }
   }
