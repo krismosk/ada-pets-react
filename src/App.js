@@ -63,15 +63,21 @@ class App extends Component {
   }
 
   addPet = (pet) => {
-
-    const { petList } = this.state;
-    const petIds = petList.map((pet) => pet.id);
-    const maxId = Math.max(...petIds);
-    pet.id = maxId + 1;
-    petList.push(pet);
-    console.log('adding', pet);
-
-    this.setState(petList);
+    axios.post('http://localhost:2999/pets', pet)
+      .then((response) => {
+        // We can update the state so we don't need to make another GET request
+        let updatedData = this.state.originalPets;
+        updatedData.push(response.data);
+        this.setState({
+          petList: updatedData,
+          originalPets: updatedData,
+          error: '',
+        });
+      })
+      .catch((error) => {
+        // Use the same idea we had in our GET request
+        this.setState({ error: error.message });
+      });
   }
 
   filterPets = (filterTerm) => {
@@ -86,12 +92,13 @@ class App extends Component {
 
 
   render () {
-    const { currentPet, petList } = this.state;
+    const { currentPet, petList, error } = this.state;
 
     return (
       <main className="App">
         <header className="app-header">
           <h1>Ada Pets</h1>
+          <p>{error ? `There is an error: ${ error }` : ''}</p>
         </header>
         <section className="search-bar-wrapper">
           { /* Wave 4:  Place to add the SearchBar component */}
