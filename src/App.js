@@ -20,6 +20,20 @@ class App extends Component {
     };
   }
 
+  componentDidMount () {
+    axios.get('http://localhost:2999/pets')
+      .then((response) => {
+        this.setState({
+          petList: response.data,
+          originalPets: response.data,
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          error: error.message,
+        })
+      });
+  }
 
   selectPet = (petId) => {
     const { petList } = this.state;
