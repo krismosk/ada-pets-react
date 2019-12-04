@@ -16,7 +16,7 @@ class App extends Component {
     this.state = {
       petList: [],
       currentPet: undefined,
-      originalPets: [],
+      fullList: [],
     };
   }
 
@@ -25,7 +25,7 @@ class App extends Component {
       .then((response) => {
         this.setState({
           petList: response.data,
-          originalPets: response.data,
+          fullList: response.data,
         });
       })
       .catch((error) => {
@@ -48,13 +48,13 @@ class App extends Component {
   deletePet = (petId) => {
     axios.delete(`http://localhost:2999/pets/${ petId }`)
       .then((response) => {
-        const petList = this.state.originalPets.filter((pet) => {
+        const petList = this.state.fullList.filter((pet) => {
           return pet.id !== petId;
         });
 
         this.setState({
           petList,
-          originalPets: petList,
+          fullList: petList,
         });
       })
       .catch((error) => {
@@ -66,11 +66,11 @@ class App extends Component {
     axios.post('http://localhost:2999/pets', pet)
       .then((response) => {
         // We can update the state so we don't need to make another GET request
-        let updatedData = this.state.originalPets;
+        let updatedData = this.state.fullList;
         updatedData.push(response.data);
         this.setState({
           petList: updatedData,
-          originalPets: updatedData,
+          fullList: updatedData,
           error: '',
         });
       })
@@ -81,7 +81,7 @@ class App extends Component {
   }
 
   filterPets = (filterTerm) => {
-    const petList = this.state.originalPets.filter((pet) => {
+    const petList = this.state.fullList.filter((pet) => {
       const text = (pet.name + ' ' + pet.about + ' ' + pet.location + ' ' + pet.species).toUpperCase();
 
       return text.includes(filterTerm.toUpperCase());
