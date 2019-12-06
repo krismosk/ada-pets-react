@@ -6,10 +6,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const PetList = (props) => {
+  const pets = props.pets;
+  
+  const petElements = pets.map((pet, i) => {
+    return (
+      <PetCard
+        key={pet.id}
+        {...pet}
+      />
+
+    );
+  });
 
 
   return (
     <div className="card-group">
+      <ul>
+        {petElements}
+      </ul>
     </div>
   )
 }

@@ -20,10 +20,7 @@ class App extends Component {
       currentPet: undefined,
     };
     console.log(pets);
-  }
-
-
-
+  } 
 
   render () {
     const { currentPet } = this.state;
@@ -38,6 +35,10 @@ class App extends Component {
           <SearchBar />
         </section>
         { /* Wave 1:  Where Pet Details should appear */}
+        <section>
+          <PetList pets={this.state.petList}/>
+
+        </section>
         <section className="pet-list-wrapper">
           { /* Wave 1:  Where PetList should appear */}
         </section>
