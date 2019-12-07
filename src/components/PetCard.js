@@ -15,9 +15,7 @@ const PetCard = (props) => {
       <section className="pet-card--header">
 
         {speciesEmoji(species)} {id} - {name}
-        <button
-          className="btn btn-primary pet-card--select-pet-btn"
-        >
+        <button className="btn btn-primary pet-card--select-pet-btn" >
           Select
         </button>
         <button

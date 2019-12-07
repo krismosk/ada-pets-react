@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 import { pets } from './data/pets.json';
+import { isTSTypeParameterDeclaration } from '@babel/types';
 // const pets = importData.pets;
 
 class App extends Component {
@@ -17,13 +18,13 @@ class App extends Component {
 
     this.state = {
       petList: pets,
-      currentPet: undefined,
+      currentPet: false,
     };
     console.log(pets);
   } 
 
   render () {
-    const { currentPet } = this.state;
+    // const { currentPet } = this.state;
 
     return (
       <main className="App">
@@ -35,12 +36,10 @@ class App extends Component {
           <SearchBar />
         </section>
         { /* Wave 1:  Where Pet Details should appear */}
-        <section>
-          <PetList pets={this.state.petList}/>
-
-        </section>
+          {/* <PetDetails currentPet={this.state.currentPet} /> */}
         <section className="pet-list-wrapper">
           { /* Wave 1:  Where PetList should appear */}
+          <PetList pets={this.state.petList} />
         </section>
         <section className="new-pet-form-wrapper">
           { /* Wave 3:  Where NewPetForm should appear */}
