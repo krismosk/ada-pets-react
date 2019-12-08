@@ -3,7 +3,6 @@ import PetList from './components/PetList';
 import PetCard from './components/PetCard'
 import PetDetails from './components/PetDetails';
 import SearchBar from './components/SearchBar';
-import NewPetForm from './components/NewPetForm';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -33,7 +32,6 @@ class App extends Component {
     }
   }
 
-
   render() {
     const { currentPet } = this.state;
     // const currentPet = this.state.currentPet;
@@ -47,19 +45,16 @@ class App extends Component {
         </header>
         <section className="search-bar-wrapper">
           { /* Wave 4:  Place to add the SearchBar component */}
-          <SearchBar />
+          {/* <SearchBar /> */}
         </section>
         { details }
         <section className="pet-list-wrapper">
-          { /* Wave 1:  Where PetList should appear */}
           <PetList 
             pets={this.state.petList} 
             selectPetCallback={this.onSelectPet}
             />
         </section>
-        <section className="new-pet-form-wrapper">
-          { /* Wave 3:  Where NewPetForm should appear */}
-        </section>
+
       </main>
     );
   }

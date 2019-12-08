@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PetCard from './PetCard';
+import NewPetForm from './NewPetForm';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 class PetList extends React.Component {
@@ -21,6 +22,13 @@ class PetList extends React.Component {
       pets: updatedPets,
     })
     
+  }
+
+  addPet = (pet) => {
+    const pets = this.state.pets;
+    pet.id = pets.reduce((max = 0, currentPet) => max ? Math.max(max, currentPet.id) : currentPet.id) + 1
+    pets.push(pet);
+    this.setState({pets});
   }
 
   // consider making an arrow function?
@@ -44,6 +52,11 @@ class PetList extends React.Component {
         <ul>
           {this.listPets(this.state.pets)}
         </ul>
+        <section className="new-pet-form-wrapper">
+          <NewPetForm 
+            addPetCallback={this.addPet}
+          />
+        </section>
       </div>
     )
   }
