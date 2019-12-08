@@ -3,29 +3,41 @@ import PropTypes from 'prop-types';
 import PetCard from './PetCard';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 class PetList extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       pets: props.pets,
-      currentPet: false,
-    }
+    };
+
   }
 
+  onDeletePet = (petId) => {
+    const updatedPets = this.state.pets.filter((pet) => {
+      return pet.id !== petId;
+    });
+
+    this.setState({
+      pets: updatedPets,
+    })
+    
+  }
+
+  // consider making an arrow function?
   listPets(pets) {
     const petElements = pets.map((pet, i) => {
-      console.log("test")
       return (
         <PetCard
           key={pet.id}
           {...pet}
+          selectPetCallback={this.props.selectPetCallback}
+          deletePetCallback={this.onDeletePet}
         />
       );
     });
-    return petElements
+    return petElements;
   }
-
+  
   render() {
     return (
       <div className="card-group">
@@ -39,6 +51,15 @@ class PetList extends React.Component {
 }
 
 
+// Proptypes
+PetList.propTypes = {
+  pets: PropTypes.array.isRequired,
+  onSelectPet: PropTypes.func,
+};
+
+export default PetList;
+
+
 
 
 // const PetList = (props) => {
@@ -50,6 +71,7 @@ class PetList extends React.Component {
 //       <PetCard
 //         key={pet.id}
 //         {...pet}
+//         selectPetCallback={props.selectPetCallback}
 //       />
 
 //     );
@@ -64,11 +86,3 @@ class PetList extends React.Component {
 //     </div>
 //   )
 // }
-
-// Proptypes
-PetList.propTypes = {
-  pets: PropTypes.array.isRequired,
-  onSelectPet: PropTypes.func,
-};
-
-export default PetList;

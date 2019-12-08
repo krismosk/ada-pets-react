@@ -9,16 +9,19 @@ import speciesEmoji from '../speciesEmoji';
 
 const PetCard = (props) => {
   const { id, name, species, about, location } = props;
+  
   return (
     <div className="card pet-card">
 
       <section className="pet-card--header">
 
         {speciesEmoji(species)} {id} - {name}
-        <button className="btn btn-primary pet-card--select-pet-btn" >
+        <button className="btn btn-primary pet-card--select-pet-btn" onClick={() => {props.selectPetCallback(props.id)}}>
           Select
         </button>
+        
         <button
+          onClick={() => props.deletePetCallback(props.id)}
           type="button"
           className="btn btn-danger pet-card--remove-btn"
           aria-label="Remove"

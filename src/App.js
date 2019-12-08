@@ -9,7 +9,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 import { pets } from './data/pets.json';
-import { isTSTypeParameterDeclaration } from '@babel/types';
 // const pets = importData.pets;
 
 class App extends Component {
@@ -18,13 +17,28 @@ class App extends Component {
 
     this.state = {
       petList: pets,
-      currentPet: false,
+      currentPet: undefined,
     };
-    console.log(pets);
   } 
 
-  render () {
-    // const { currentPet } = this.state;
+  onSelectPet = (petId) => {
+    const selectedPet = this.state.petList.find((pet) => {
+      return pet.id === petId;
+    });
+
+    if (selectedPet) {
+      this.setState({
+        currentPet: selectedPet,
+      });
+    }
+  }
+
+
+  render() {
+    const { currentPet } = this.state;
+    // const currentPet = this.state.currentPet;
+    const details = currentPet ? <PetDetails currentPet={currentPet} /> : '';
+
 
     return (
       <main className="App">
@@ -35,11 +49,13 @@ class App extends Component {
           { /* Wave 4:  Place to add the SearchBar component */}
           <SearchBar />
         </section>
-        { /* Wave 1:  Where Pet Details should appear */}
-          {/* <PetDetails currentPet={this.state.currentPet} /> */}
+        { details }
         <section className="pet-list-wrapper">
           { /* Wave 1:  Where PetList should appear */}
-          <PetList pets={this.state.petList} />
+          <PetList 
+            pets={this.state.petList} 
+            selectPetCallback={this.onSelectPet}
+            />
         </section>
         <section className="new-pet-form-wrapper">
           { /* Wave 3:  Where NewPetForm should appear */}
